@@ -1,0 +1,56 @@
+{% extends "base.html" %} 
+
+{% block title %}Home{% endblock %} 
+
+
+{% block content %}
+
+  
+
+    <h1 align="center" class="m-5" > My Notes </h1>
+  
+    
+    <ul class="list-group list-group-light list-group-numbered id="notes">
+
+      <!--Display all notes -->
+      {% if user.notes == None %} 
+        <p> You have no notes </p>
+      {% else %}
+      {% for note in user.notes %}
+        <li class="list-group-item">
+          {{ note.note_data }}
+          <button type-="button" class="close" 
+          data-mdb-dismiss="alert" 
+          onClick="deleteNote({{ note.id }})">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </li>
+     
+      {% endfor %}
+      {% endif %}  
+      
+      </ul>
+
+
+      <!--add new note-->
+      <form method="POST">
+
+        
+        <div class="form-outline m-5" >
+
+          <textarea i
+          d="note" 
+          name="note" 
+          class="form-control"  
+          row="4"></textarea>
+          <label class="form-label" for="textarea">Add new Note</label>
+          
+        </div>
+          <div align="center"  class="m-2">
+            <button type="submit" class="btn btn-dark">Add Note</button>
+          </div>
+
+      </form> 
+
+  
+{% endblock %}
